@@ -1,8 +1,17 @@
 <script>
   import {FeedbackStore} from '../stores'
 
+  const handleNaN = function(value) {
+    if(Number.isNaN(value)) {
+      return 0
+    }
+    else {
+      return value;
+    }
+  }
+  
   $: count = $FeedbackStore.length
-  $: average = $FeedbackStore.reduce((a, {rating}) => a + rating, 0) / $FeedbackStore.length
+  $: average = handleNaN($FeedbackStore.reduce((a, {rating}) => a + rating, 0) / $FeedbackStore.length)
 </script>
 
 <div class="feedback-stats">
